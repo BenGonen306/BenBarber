@@ -235,24 +235,41 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
-              <Link
-                href="/barbershop"
-                style={{
-                  background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`,
-                  color: C.charcoal,
-                  borderRadius: 12,
-                  padding: "14px 24px",
-                  fontFamily: "var(--font-rubik), sans-serif",
-                  fontWeight: 800,
-                  fontSize: 16,
-                  textDecoration: "none",
-                  display: "inline-block",
-                  marginTop: 12,
-                  alignSelf: "flex-start",
-                }}
-              >
-                לקביעת תור עכשיו ←
-              </Link>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 12 }}>
+                <Link
+                  href="/barbershop"
+                  style={{
+                    background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`,
+                    color: C.charcoal,
+                    borderRadius: 12,
+                    padding: "14px 24px",
+                    fontFamily: "var(--font-rubik), sans-serif",
+                    fontWeight: 800,
+                    fontSize: 16,
+                    textDecoration: "none",
+                    display: "inline-block",
+                  }}
+                >
+                  לקביעת תור עכשיו ←
+                </Link>
+                <Link
+                  href="/academy"
+                  style={{
+                    background: "transparent",
+                    color: C.white,
+                    border: "1.5px solid rgba(255,255,255,0.25)",
+                    borderRadius: 12,
+                    padding: "14px 24px",
+                    fontFamily: "var(--font-rubik), sans-serif",
+                    fontWeight: 700,
+                    fontSize: 16,
+                    textDecoration: "none",
+                    display: "inline-block",
+                  }}
+                >
+                  לאקדמיה
+                </Link>
+              </div>
             </nav>
           </motion.div>
         )}
