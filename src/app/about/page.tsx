@@ -85,26 +85,25 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* Text */}
+          {/* Text — first person */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             style={{ display: "flex", flexDirection: "column", gap: 32 }}>
             <div>
-              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.9 }}>
-                בן גונן חי ונושם את עולם הברברינג ועיצוב השיער כבר שנים ארוכות. לאחר שרכש את השכלתו המקצועית, התמחה באקדמיות הבינלאומיות המובילות בעולם וספג ללא הרף את הטרנדים הכי חמים מבירות האופנה הגלובליות, הוא הבין שיש פער ענק בשוק הישראלי.
+              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.95 }}>
+                אני בן גונן, ואני פשוט יודע מה גבר צריך. אני יודע מה אתה צריך. המטרה שלי היא לשנות לאנשים את החיים, להביא אותם לשיא שלהם בתור גבר.
               </p>
             </div>
 
             <div style={{ borderRight: `3px solid ${C.gold}`, paddingRight: 24 }}>
-              <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 18, color: C.goldHi, marginBottom: 14 }}>הקמת הסטודיו והאקדמיה</h3>
-              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.9 }}>
-                בן זיהה שמרבית הספרים יוצאים לשטח כשהם חסרי ביטחון מעשי ולא שולטים באמת בכלי החשוב ביותר של מעצב השיער – המספריים. מתוך הרצון להעלות את רמת המקצועיות בארץ, הוא הקים בחולון קומפלקס ייחודי המשלב מספרת בוטיק פעילה ותוססת לצד אקדמיית הדרכה מתקדמת.
+              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.95 }}>
+                אני לא רק מספר, אני אבן דרך. אני מרגיש כמו שליח של ההוא שם למעלה לקחת גברים שמגיעים ללא מודעות בנראות וחוסר הבנה מוחלט בנושא – ולהפוך אותם לגברים עם ביטחון עצמי מטורף, גברים שנראים הרבה יותר טוב, מרגישים הרבה יותר טוב וחיים הרבה יותר טוב.
               </p>
             </div>
 
             <div style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)", borderRadius: 16, padding: "24px 28px" }}>
-              <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, color: C.gold, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>האני מאמין המקצועי</div>
-              <blockquote style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.9, margin: 0, fontStyle: "italic" }}>
-                "ההצלחה בתחום הזה מורכבת משני דברים: שליטה טכנית פנומנלית ויכולת עסקית יוצאת דופן. באקדמיה שלנו אנחנו לא רק מלמדים איך להחזיק מכונה, אלא מרחיבים לתלמיד את השריר היצירתי, מעניקים לו תשומת לב מלאה בכיתות קטנות, ומלמדים אותו איך לנהל עסק, למשוך לקוחות ולבנות מותג משגשג מהיום הראשון."
+              <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, color: C.gold, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>הייעוד שלי</div>
+              <blockquote style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.95, margin: 0, fontStyle: "italic" }}>
+                "הייעוד שלי בחיים הוא לעזור לך להשיג את כל מה שאתה רוצה בחיים, וזה לא משנה באיזה תחום. ביטחון משנה אופי. גב זקוף נוצר רק כשאתה באמת אוהב את עצמך – ואני כאן כדי לדאג לזה באופן אישי."
               </blockquote>
               <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.goldHi, marginTop: 16 }}>— בן גונן</div>
             </div>
@@ -112,7 +111,78 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* COMMUNITY */}
+      {/* ACADEMY MANIFESTO */}
+      <section style={{ padding: "0 1.5rem 100px", maxWidth: 900, margin: "0 auto" }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.15)", borderRadius: 24, padding: "48px 40px" }}>
+          <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>מעבר לספר</div>
+          <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", color: C.white, marginBottom: 24 }}>
+            מעבר לספר –{" "}
+            <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>אני מורה</span>
+          </h2>
+          <p style={{ fontFamily: "var(--font-heebo)", fontSize: 17, color: C.muted, lineHeight: 1.95, maxWidth: 700 }}>
+            כולם בחוץ ילמדו אותך איך להחזיק מספריים בצורה טכנית ולטשטש את קו האפס בתוך הדירוג. אני לא שם. אני כאן כדי ללמד אותך איך להפוך לגברים את החיים, איך לבנות מותג, למשוך לקוחות ולייצר קריירה משגשגת ורווחית מהרגע הראשון.
+          </p>
+          <Link href="/academy" style={{ display: "inline-block", marginTop: 32, background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, borderRadius: 12, padding: "14px 32px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, textDecoration: "none" }}>
+            לאקדמיה ←
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* CELEBRITY SHOWCASE */}
+      <section style={{ padding: "0 1.5rem 100px", maxWidth: 1200, margin: "0 auto" }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          style={{ textAlign: "center", marginBottom: 52 }}>
+          <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>עבודות נבחרות</div>
+          <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(1.8rem, 4.5vw, 3rem)", color: C.white, lineHeight: 1.15, margin: "0 0 16px" }}>
+            סלבריטים, ספורטאים{" "}
+            <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>וכוכבי רשת</span>
+          </h2>
+          <p style={{ fontFamily: "var(--font-heebo)", fontSize: 17, color: C.muted, maxWidth: 560, margin: "0 auto", lineHeight: 1.8 }}>
+            הגברים שבחרו לסמוך עליי — מסלבריטים ושחקני כדורגל ועד כוכבי הרשת הגדולים בארץ.
+          </p>
+        </motion.div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 20 }}>
+          {[
+            { name: "סטפן", role: "שחקן כדורגל", file: "celebrity-stefan.webp" },
+            { name: "בן אל תבורי", role: "זמר ואמן", file: "celebrity-ben-el.webp" },
+            { name: "שחקן כדורגל", role: "קבוצת ישראל", file: "celebrity-football-1.webp" },
+            { name: "כוכב רשת", role: "אינפלואנסר", file: "celebrity-influencer-1.webp" },
+            { name: "ספורטאי", role: "אתלט מקצועי", file: "celebrity-athlete.webp" },
+            { name: "VIP", role: "לקוח פרמיום", file: "celebrity-vip.webp" },
+          ].map((cel, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.07 }}
+              style={{ borderRadius: 18, overflow: "hidden", background: C.surface, border: "1px solid rgba(212,175,55,0.12)", position: "relative" }}
+              whileHover={{ scale: 1.025 }}>
+              {/* Drop your .webp file here — replace the placeholder div with <img src={`/celebs/${cel.file}`} ... /> */}
+              <div style={{ aspectRatio: "3/4", background: `linear-gradient(155deg, rgba(150,3,26,0.4) 0%, rgba(26,26,26,0.85) 100%)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, position: "relative" }}>
+                <span style={{ fontSize: 52, opacity: 0.25 }}>✂️</span>
+                <span style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim, letterSpacing: "0.08em" }}>
+                  {cel.file}
+                </span>
+                {/* Gold corner accent */}
+                <div style={{ position: "absolute", top: 12, insetInlineEnd: 12, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>★</div>
+              </div>
+              <div style={{ padding: "14px 16px" }}>
+                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 15, color: C.white }}>{cel.name}</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim, marginTop: 3 }}>{cel.role}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+          style={{ textAlign: "center", fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim, marginTop: 28 }}>
+          להחלפת הפלייסהולדרים: הנח קבצי .webp בתיקיית <code style={{ color: C.gold }}>/public/celebs/</code> עם אותם שמות קבצים.
+        </motion.p>
+      </section>
+
+      {/* COMMUNITY CTA */}
       <section style={{ padding: "0 1.5rem 120px" }}>
         <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.65 }}
           style={{ maxWidth: 900, margin: "0 auto", background: "linear-gradient(135deg, rgba(150,3,26,0.28) 0%, rgba(26,26,26,0.65) 100%)", border: "1px solid rgba(212,175,55,0.2)", borderRadius: 28, padding: "clamp(40px, 7vw, 72px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
@@ -124,7 +194,7 @@ export default function AboutPage() {
               <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>קהילה אמיתית</span>
             </h2>
             <p style={{ fontFamily: "var(--font-heebo)", fontSize: 17, color: C.muted, lineHeight: 1.85, maxWidth: 620, margin: "0 auto 36px" }}>
-              המותג BenBarber הוא קודם כל קהילה של אנשי מקצוע, בוגרים ולקוחות שתומכים זה בזה. אלפי התלמידים שעברו אצלנו לאורך השנים נהנים מבית חם שתמיד פתוח להשתלמויות, התייעצויות וליווי אישי לאורך כל הקריירה המקצועית שלהם.
+              המותג BenBarber הוא קודם כל קהילה של אנשי מקצוע, בוגרים ולקוחות שתומכים זה בזה. אלפי התלמידים שעברו אצלי לאורך השנים נהנים מבית חם שתמיד פתוח להשתלמויות, התייעצויות וליווי אישי לאורך כל הקריירה המקצועית שלהם.
             </p>
             <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
               <Link href="/academy" style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, borderRadius: 12, padding: "14px 32px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, textDecoration: "none" }}>

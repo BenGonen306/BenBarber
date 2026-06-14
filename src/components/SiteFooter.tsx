@@ -23,10 +23,8 @@ const footerNav = [
 ];
 
 const socials = [
-  { label: "Facebook", href: "https://www.facebook.com/bengonen", icon: "𝔽" },
   { label: "Instagram", href: "https://www.instagram.com/ben_gon/", icon: "📸" },
   { label: "TikTok", href: "https://www.tiktok.com/@bengonen", icon: "🎵" },
-  { label: "YouTube", href: "https://www.youtube.com/@bengonen", icon: "▶" },
 ];
 
 export function SiteFooter() {
@@ -120,55 +118,6 @@ export function SiteFooter() {
                 >
                   {link.label}
                 </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Hours */}
-          <div>
-            <div
-              style={{
-                fontFamily: "var(--font-rubik), sans-serif",
-                fontWeight: 700,
-                fontSize: 12,
-                color: C.goldHi,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 18,
-              }}
-            >
-              שעות פעילות
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {[
-                { day: "ימים א׳–ה׳", hours: "10:00 – 20:00" },
-                { day: "יום ו׳", hours: "10:00 – 13:00" },
-                { day: "שבת", hours: "סגור" },
-              ].map((row) => (
-                <div
-                  key={row.day}
-                  style={{ display: "flex", justifyContent: "space-between", gap: 16 }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-heebo), sans-serif",
-                      fontSize: 13,
-                      color: C.dim,
-                    }}
-                  >
-                    {row.day}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-rubik), sans-serif",
-                      fontSize: 13,
-                      color: C.muted,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {row.hours}
-                  </span>
-                </div>
               ))}
             </div>
           </div>

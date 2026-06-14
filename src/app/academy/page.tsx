@@ -53,7 +53,7 @@ function LeadModal({ open, onClose }: { open: boolean; onClose: () => void }) {
                 <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 10 }}>ייעוץ מקצועי חינם</div>
                   <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 22, color: C.white, marginBottom: 8 }}>השאר פרטים ונחזור אליך</h3>
-                  <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.7, marginBottom: 24 }}>נסייע לך למצוא את מסלול הלימודים המתאים בדיוק לצרכים ולרמה שלך.</p>
+                  <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.7, marginBottom: 24 }}>תישאר זמין וחד. השאר פרטים כאן למטה, והצוות המקצועי שלי יחזור אליך כדי להתאים לך את מסלול הלימודים המדויק שיביא אותך לשיא שלך.</p>
                   <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                     <div><label style={{ display: "block", fontFamily: "var(--font-rubik)", fontSize: 13, fontWeight: 600, color: C.muted, marginBottom: 7 }}>שם מלא</label>
                       <input type="text" placeholder="ישראל ישראלי" value={name} onChange={e => setName(e.target.value)} required style={inp} onFocus={e => (e.target.style.borderColor = C.gold)} onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.12)")} /></div>

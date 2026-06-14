@@ -54,10 +54,42 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
 }
 
 const services = [
-  { icon: "✂️", name: "תספורת גבר קלאסית / מודרנית", desc: "ביצוע מדויק של כל הסגנונות החמים – קרופ, פייד מודרני, אנדרקט, טייפר פייד ועוד.", price: "מ-₪80" },
-  { icon: "💈", name: "תספורת מספריים ארוכה", desc: "מולט, מיד פארט, עיצוב שכבות מקצועי וטקסטורה לשמירה על אורך בריא ומראה גברי ומעוצב.", price: "מ-₪100" },
-  { icon: "🪒", name: "עיצוב ופיסול זקן", desc: "חידוד קווי מתאר מדויקים, התאמה למבנה הלסת ושימוש במוצרי הזנה וטיפוח מובחרים.", price: "מ-₪60" },
-  { icon: "👑", name: "טיפול VIP מלא", desc: "תספורת, עיצוב זקן אדריכלי, ניקוי פנים ומסכה מרעננת בשילוב מגבות חמות לחוויית פינוק מוחלטת.", price: "מ-₪220" },
+  {
+    icon: "✂️",
+    name: "תספורת בלי זקן",
+    desc: "תספורת ללא זקן / זקן צרפתי. כל הסגנונות החמים – קרופ, פייד, אנדרקט, טייפר ועוד.",
+    duration: "50 דקות",
+    price: "₪100",
+  },
+  {
+    icon: "💈",
+    name: "תספורת עם זקן",
+    desc: "תספורת עם זקן מלא / איטלקי. דירוג + עיצוב זקן אדריכלי מושלם.",
+    duration: "שעה",
+    price: "₪120",
+  },
+  {
+    icon: "✂️",
+    name: "תספורת עם גזירות",
+    desc: "תספורת עם שיער ארוך. מולט, מיד פארט, שכבות, טקסטורה – מדויק לאורך.",
+    duration: "שעה ו-10 דקות",
+    price: "₪130",
+  },
+  {
+    icon: "⏰",
+    name: "לא הסתפרתי מעל לחודש",
+    desc: "אתה צריך טיפול. נסדר הכל מהיסוד – דירוג, ניקוי ועיצוב מחדש.",
+    duration: "שעה ו-10 דקות",
+    price: "₪130",
+  },
+  {
+    icon: "🚨",
+    name: "תור חירום",
+    desc: "אין תורים פנויים ואתה חייב להסתפר? כניסה מיידית לרשימת ההמתנה.",
+    duration: "בהתאם לזמינות",
+    price: "₪150",
+    highlight: true,
+  },
 ];
 
 /* ═══════════════════════════════════════════════════════
@@ -129,13 +161,23 @@ export default function BarbershopPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
           {services.map((s, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.1)", borderRadius: 20, padding: "32px 28px", display: "flex", flexDirection: "column", gap: 14 }}
+              style={{ background: s.highlight ? "rgba(150,3,26,0.18)" : "rgba(255,255,255,0.03)", border: `1px solid ${s.highlight ? "rgba(150,3,26,0.55)" : "rgba(212,175,55,0.1)"}`, borderRadius: 20, padding: "32px 28px", display: "flex", flexDirection: "column", gap: 14 }}
               whileHover={{ scale: 1.015 }}>
-              <div style={{ fontSize: 36 }}>{s.icon}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <span style={{ fontSize: 32 }}>{s.icon}</span>
+                {s.highlight && (
+                  <span style={{ background: "rgba(150,3,26,0.6)", border: "1px solid rgba(255,100,100,0.4)", borderRadius: 999, padding: "3px 12px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 11, color: "#ffb3b3", letterSpacing: "0.08em" }}>
+                    חירום
+                  </span>
+                )}
+              </div>
               <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, color: C.white, margin: 0 }}>{s.name}</h3>
               <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0, flex: 1 }}>{s.desc}</p>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, color: C.dim, fontSize: 13, fontFamily: "var(--font-heebo)" }}>
+                <span>⏱</span> {s.duration}
+              </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
-                <span style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 22, background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.price}</span>
+                <span style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 26, background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.price}</span>
                 <button onClick={() => setBookingOpen(true)} style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
                   לתור ←
                 </button>

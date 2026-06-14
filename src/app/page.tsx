@@ -155,11 +155,11 @@ export default function HomePage() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2 }}
-            style={{ fontFamily: "var(--font-heebo)", fontSize: "clamp(1rem, 2.2vw, 1.18rem)", color: C.muted, lineHeight: 1.8, maxWidth: 680, margin: "0 auto 44px" }}
+            style={{ fontFamily: "var(--font-heebo)", fontSize: "clamp(1rem, 2.2vw, 1.18rem)", color: C.muted, lineHeight: 1.9, maxWidth: 700, margin: "0 auto 44px" }}
           >
-            בן גונן – אקדמיה מובילה ללימודי ספרות גברים ומספרת בוטיק יוקרתית בחולון.
+            במספרת הבוטיק היוקרתית שלנו בחולון תקבל תספורת ברמה שלא ראית — דירוגים חדים, עיצוב זקן אדריכלי, צ׳ייסר וקפה שחור חזק, ואווירה שכולה גבריות אמיתית.
             <br />
-            המקום שבו חדות, דיוק מוחלט וסטייל בינלאומי נפגשים.
+            ובאקדמיית BenBarber תלמד ברברינג אמיתי מהמקצוענים הטובים בארץ — על לקוחות חיים, מהיום הראשון.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.3 }}
@@ -241,6 +241,18 @@ export default function HomePage() {
               >
                 {card.cta}
               </Link>
+
+              {/* Photo placeholder grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+                {[0, 1].map((j) => (
+                  <div key={j} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: "rgba(255,255,255,0.04)", border: "1px dashed rgba(212,175,55,0.2)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                    <span style={{ fontSize: 22, opacity: 0.35 }}>{i === 0 ? "✂️" : "🎓"}</span>
+                    <span style={{ fontFamily: "var(--font-heebo)", fontSize: 10, color: C.dim, letterSpacing: "0.08em" }}>
+                      {i === 0 ? "תמונת מספרה" : "תמונת אקדמיה"}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -299,12 +311,17 @@ export default function HomePage() {
                 🧴
               </div>
               <div style={{ padding: "22px 24px" }}>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, color: C.white, marginBottom: 8 }}>{p.name}</div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, color: C.white }}>{p.name}</div>
+                  <span style={{ background: "rgba(212,175,55,0.15)", border: "1px solid rgba(212,175,55,0.35)", borderRadius: 999, padding: "3px 10px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 11, color: C.goldHi, whiteSpace: "nowrap", letterSpacing: "0.06em" }}>
+                    בקרוב
+                  </span>
+                </div>
                 <div style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, marginBottom: 18, lineHeight: 1.7 }}>{p.desc}</div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 22, background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{p.price}</div>
-                  <button style={{ display: "flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
-                    <ShoppingCart size={14} /> הוסף לסל
+                  <button disabled style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.07)", color: C.dim, border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "not-allowed" }}>
+                    <ShoppingCart size={14} /> בקרוב
                   </button>
                 </div>
               </div>
