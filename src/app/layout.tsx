@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Heebo, Rubik } from "next/font/google";
-import Script from "next/script";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 const heebo = Heebo({
@@ -18,24 +19,22 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "מכללת גורדון | הנדסאי אלקטרוניקה ומכטרוניקה י״ג י״ד",
+  title: "BenBarber – מספרת בוטיק ואקדמיה לספרות גברים | חולון",
   description:
-    "מסלול ייחודי לדחיית שירות או לאחר שירות: תעודת הנדסאי אלקטרוניקה / מכטרוניקה, תואר ראשון ותעודת הוראה טכנולוגית - הכול בשנתיים בלבד.",
+    "בן גונן – מספרת בוטיק יוקרתית ואקדמיה מובילה לספרות גברים בחולון. קורסים פרונטליים ודיגיטליים, תרגול על לקוחות אמיתיים, וצוות All-Stars שיביא אותך לגרסה הכי חדה שלך.",
   keywords: [
-    "גורדון",
-    "הנדסאי",
-    "אלקטרוניקה",
-    "מכטרוניקה",
-    "תעודת הוראה",
-    "תואר ראשון",
-    "י״ג י״ד",
-    "דחיית שירות",
-    "מלגת פרח",
+    "ספרות גברים",
+    "אקדמיה לספרות",
+    "מספרה חולון",
+    "בן גונן",
+    "ברברינג",
+    "קורס ספרות",
+    "תספורת גברים",
+    "BenBarber",
   ],
   openGraph: {
-    title: "מכללת גורדון | הנדסאי אלקטרוניקה ומכטרוניקה",
-    description:
-      "שלוש תעודות בשנתיים: הנדסאי + תואר ראשון + תעודת הוראה. הרשמה לתשפ״ז פתוחה.",
+    title: "BenBarber – מספרת בוטיק ואקדמיה לספרות גברים",
+    description: "חוויית ברברינג פרמיום ואקדמיה לספרות גברים. חולון, ישראל.",
     locale: "he_IL",
     type: "website",
   },
@@ -48,31 +47,36 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl" className={`${heebo.variable} ${rubik.variable}`}>
-      <head>
-        <Script id="meta-pixel" strategy="afterInteractive">{`
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '2034031087149219');
-          fbq('track', 'PageView');
-        `}</Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=2034031087149219&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
-      </head>
-      <body className="bg-background text-foreground antialiased min-h-screen overflow-x-hidden pt-12">
-        {children}
+      <head />
+      <body
+        style={{
+          margin: 0,
+          padding: 0,
+          background: "linear-gradient(135deg, #1a1a1a 0%, #96031a 100%)",
+          backgroundAttachment: "fixed",
+          minHeight: "100vh",
+          overflowX: "hidden",
+          color: "#ffffff",
+          fontFamily: "var(--font-heebo), sans-serif",
+        }}
+      >
+        {/* Epoxy floor texture overlay */}
+        <div
+          aria-hidden
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundImage:
+              "repeating-linear-gradient(120deg, transparent 0px, transparent 120px, rgba(255,255,255,0.011) 120px, rgba(255,255,255,0.011) 121px), repeating-linear-gradient(240deg, transparent 0px, transparent 90px, rgba(255,255,255,0.007) 90px, rgba(255,255,255,0.007) 91px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <SiteHeader />
+          <main style={{ paddingTop: 72 }}>{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
