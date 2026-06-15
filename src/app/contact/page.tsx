@@ -54,18 +54,18 @@ export default function ContactPage() {
         <div style={{ position: "relative", maxWidth: 760, margin: "0 auto" }}>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}
             style={{ display: "inline-block", padding: "7px 20px", borderRadius: 999, background: "rgba(212,175,55,0.11)", border: "1px solid rgba(212,175,55,0.32)", color: C.goldHi, fontSize: 13, fontFamily: "var(--font-heebo)", fontWeight: 600, marginBottom: 28 }}>
-            💬 אנחנו כאן בשבילך
+            💬 אני כאן בשבילך
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1 }}
             style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(2rem, 5.5vw, 4rem)", lineHeight: 1.1, color: C.white, marginBottom: 20 }}>
-            דברו איתנו –{" "}
+            דברו איתי –{" "}
             <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold}, ${C.goldLo})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              אנחנו כאן לכל שאלה
+              אני כאן לכל שאלה
             </span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2 }}
             style={{ fontFamily: "var(--font-heebo)", fontSize: "clamp(1rem, 2vw, 1.12rem)", color: C.muted, lineHeight: 1.8, maxWidth: 620, margin: "0 auto" }}>
-            רוצה לתאם תור? מתלבט איזה קורס יקפיץ לך את הקריירה? או שבא לך פשוט לבוא לשבת איתנו על קפה טוב בסטודיו? תרגיש בבית, אנחנו זמינים עבורך בכל דרך שתבחר.
+            רוצה לתאם תור? מתלבט איזה קורס יקפיץ לך את הקריירה? או שבא לך פשוט לבוא לשבת איתי על קפה טוב בסטודיו? תרגיש בבית, אני זמין עבורך בכל דרך שתבחר.
           </motion.p>
         </div>
       </section>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 <motion.div key="success" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: "center", padding: "32px 0" }}>
                   <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
                   <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 22, color: C.white, marginBottom: 10 }}>ההודעה נשלחה!</h3>
-                  <p style={{ fontFamily: "var(--font-heebo)", fontSize: 15, color: C.muted, lineHeight: 1.8 }}>הצוות של BenBarber יחזור אליך תוך יום עסקים אחד. תודה!</p>
+                  <p style={{ fontFamily: "var(--font-heebo)", fontSize: 15, color: C.muted, lineHeight: 1.8 }}>בן גונן יחזור אליך תוך יום עסקים אחד. תודה!</p>
                 </motion.div>
               ) : (
                 <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={submit}
@@ -118,7 +118,7 @@ export default function ContactPage() {
                     style={{ background: loading ? "rgba(212,175,55,0.5)" : `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 12, padding: "15px 24px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, cursor: loading ? "not-allowed" : "pointer", transition: "transform 0.18s" }}
                     onMouseEnter={e => !loading && (e.currentTarget.style.transform = "translateY(-2px)")}
                     onMouseLeave={e => (e.currentTarget.style.transform = "")}>
-                    {loading ? "שולח..." : "שלח הודעה לצוות המקצועי ←"}
+                    {loading ? "שולח..." : "שלח הודעה ←"}
                   </button>
                 </motion.form>
               )}
@@ -131,8 +131,8 @@ export default function ContactPage() {
 
             <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 4 }}>פרטי התקשרות</div>
             <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", color: C.white, margin: "0 0 8px" }}>
-              איפה אנחנו{" "}
-              <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>יושבים?</span>
+              איפה אני{" "}
+              <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>יושב?</span>
             </h2>
 
             {/* Contact chips */}

@@ -124,7 +124,7 @@ export default function AcademyPage() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2 }}
             style={{ fontFamily: "var(--font-heebo)", fontSize: "clamp(1rem, 2vw, 1.15rem)", color: C.muted, lineHeight: 1.8, maxWidth: 680, margin: "0 auto 40px" }}>
-            אל תתפשר על קורס כללי. למד את רזי הברברינג המודרני מהמקצוענים הטובים ביותר. קורסים פרונטליים ודיגיטליים המותאמים למתחילים מאפס ועד למקצוענים שרוצים לשלוט במספריים ולמלא את היומן.
+            תלמד ישירות מבן גונן את סודות אומנות הברברינג המודרני. הכשרה פרונטלית המתאימה למתחילים מאפס ועד למקצוענים שרוצים לשלוט במספריים ולמלא את היומן מפה לאוזן.
           </motion.p>
           <motion.button initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.3 }}
             onClick={() => setModal(true)}
@@ -157,22 +157,22 @@ export default function AcademyPage() {
       {/* METHODOLOGY */}
       <section style={{ padding: "100px 1.5rem", maxWidth: 1100, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <SectionHeading eyebrow="המתודולוגיה שלנו" title="איך אנחנו הופכים אותך" highlight="למקצוען בתוך שבועות ספורים?" />
+          <SectionHeading eyebrow="המתודולוגיה שלי" title="איך אני הופך אותך" highlight="למקצוען בתוך שבועות ספורים?" />
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.14)", borderRadius: 24, padding: "48px 40px", maxWidth: 800, margin: "0 auto" }}>
           <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.9, marginBottom: 28 }}>
-            ברוב בתי הספר לעיצוב שיער, ספרות גברים היא רק פרק קטן וזניח שנלמד על ראשי בובות מפלסטיק. אצלנו, ספרות גברים היא הלב והנשמה.
+            ברוב בתי הספר לעיצוב שיער, ספרות גברים היא רק פרק קטן וזניח שנלמד על ראשי בובות מפלסטיק. אצלי, ספרות גברים היא הלב והנשמה.
           </p>
           <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 18, color: C.goldHi, marginBottom: 14 }}>המודל המעשי</h3>
           <p style={{ fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, lineHeight: 1.9, marginBottom: 28 }}>
-            פיתחנו שיטת לימוד ייחודית שבה התיאוריה מתורגמת מיד לפרקטיקה בשטח. מודליסטים ולקוחות אמיתיים מגיעים לסטודיו האקדמיה, ואתה מספר אותם בהדרכה צמודה, צעד-אחר-צעד, של המדריכים המומחים שלנו. המדריך עומד לצדך, מתקן את זווית האחיזה במספריים או במכונה, מסביר את הלוגיקה מאחורי חלוקת הראש, ומעניק לך ביטחון מלא לקראת היציאה לשוק העבודה.
+            פיתחתי שיטת לימוד ייחודית שבה התיאוריה מתורגמת מיד לפרקטיקה בשטח. מודליסטים ולקוחות אמיתיים מגיעים לסטודיו, ואתה מספר אותם בהדרכה צמודה, צעד-אחר-צעד. אני עומד לצדך, מתקן את זווית האחיזה במספריים או במכונה, מסביר את הלוגיקה מאחורי חלוקת הראש, ומעניק לך ביטחון מלא לקראת היציאה לשוק העבודה.
           </p>
           <div style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: 14, padding: "20px 24px", display: "flex", alignItems: "flex-start", gap: 14 }}>
             <span style={{ fontSize: 28, flexShrink: 0 }}>🎁</span>
             <div>
               <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 15, color: C.goldHi, marginBottom: 6 }}>בונוס ייחודי</div>
-              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>כל תלמיד במסלולים הפרונטליים המקיפים מקבל מאיתנו ערכת ציוד מקצועית במתנה! כלים איכותיים ורציניים שישמשו אותך לתרגול וילוו אותך גם ביום שאחרי קבלת התעודה.</p>
+              <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>כל תלמיד במסלולים הפרונטליים המקיפים מקבל ממני ערכת ציוד מקצועית במתנה! כלים איכותיים ורציניים שישמשו אותך לתרגול וילוו אותך גם ביום שאחרי קבלת התעודה.</p>
             </div>
           </div>
         </motion.div>

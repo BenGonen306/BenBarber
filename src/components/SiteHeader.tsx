@@ -149,6 +149,27 @@ export function SiteHeader() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <Link
+            href="/academy"
+            className="bb-desktop-cta"
+            style={{
+              background: "transparent",
+              color: C.white,
+              border: "1.5px solid rgba(255,255,255,0.22)",
+              borderRadius: 10,
+              padding: "9px 18px",
+              fontFamily: "var(--font-rubik), sans-serif",
+              fontWeight: 700,
+              fontSize: 14,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              transition: "border-color 0.2s, color 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.goldHi; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)"; e.currentTarget.style.color = C.white; }}
+          >
+            לאקדמיית הספרות
+          </Link>
+          <Link
             href="/barbershop"
             className="bb-desktop-cta"
             style={{
@@ -164,7 +185,7 @@ export function SiteHeader() {
               whiteSpace: "nowrap",
             }}
           >
-            לקביעת תור
+            לקביעת תור במספרה
           </Link>
 
           {/* Hamburger */}

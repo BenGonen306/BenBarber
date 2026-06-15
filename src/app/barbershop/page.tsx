@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -9,6 +9,71 @@ const C = {
   gold: "#d4af37", goldHi: "#e9d2a6", goldLo: "#aa7c11",
   white: "#ffffff", muted: "#c8c8c8", dim: "#777777",
 };
+
+/* ── Celebrity Carousel ────────────────────────────────── */
+const celebs = [
+  { name: "סטפן", role: "שחקן כדורגל", emoji: "⚽", file: "stefan.webp" },
+  { name: "בן אל תבורי", role: "זמר ואמן", emoji: "🎤", file: "ben-el.webp" },
+  { name: "שחקן כדורגל", role: "נבחרת ישראל", emoji: "⚽", file: "football-1.webp" },
+  { name: "כוכב רשת", role: "אינפלואנסר", emoji: "📱", file: "influencer-1.webp" },
+  { name: "ספורטאי", role: "אתלט מקצועי", emoji: "🏆", file: "athlete.webp" },
+  { name: "לקוח VIP", role: "לקוח פרמיום", emoji: "⭐", file: "vip.webp" },
+];
+
+function CelebCarousel() {
+  const all = [...celebs, ...celebs];
+  return (
+    <section style={{ padding: "60px 0 80px", overflow: "hidden" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", marginBottom: 40, textAlign: "center" }}>
+        <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
+          לקוחות מיוחדים
+        </div>
+        <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(1.8rem, 4.5vw, 3rem)", color: C.white, lineHeight: 1.15, margin: 0 }}>
+          הגברים{" "}
+          <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>שלי:</span>
+        </h2>
+      </div>
+      <div style={{ overflow: "hidden", position: "relative" }}>
+        <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 80, background: "linear-gradient(to left, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 80, background: "linear-gradient(to right, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+        <div className="bb-celeb-track">
+          {all.map((cel, i) => (
+            <div key={i} style={{ flexShrink: 0 }}>
+              <div style={{
+                width: 190, height: 250, borderRadius: 18,
+                background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
+                border: "1px solid rgba(212,175,55,0.15)",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 8, position: "relative", overflow: "hidden",
+              }}>
+                <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
+                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+                </div>
+                <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        .bb-celeb-track {
+          display: flex;
+          gap: 20px;
+          width: max-content;
+          animation: bb-scroll 30s linear infinite;
+          padding: 8px 10px;
+        }
+        .bb-celeb-track:hover { animation-play-state: paused; }
+        @keyframes bb-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
+    </section>
+  );
+}
 
 function SectionHeading({ eyebrow, title, highlight, sub }: { eyebrow?: string; title: string; highlight?: string; sub?: string }) {
   return (
@@ -24,11 +89,14 @@ function SectionHeading({ eyebrow, title, highlight, sub }: { eyebrow?: string; 
 
 /* ── TidyCal modal ──────────────────────────────────────── */
 function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const loaded = useRef(false);
   useEffect(() => {
-    if (open && !loaded.current) {
-      const s = document.createElement("script"); s.src = "https://tidycal.com/js/embed.js"; s.async = true; document.body.appendChild(s);
-      loaded.current = true;
+    if (open) {
+      const existing = document.querySelector('script[src="https://tidycal.com/js/embed.js"]');
+      if (existing) existing.remove();
+      const s = document.createElement("script");
+      s.src = "https://tidycal.com/js/embed.js";
+      s.async = true;
+      document.body.appendChild(s);
     }
   }, [open]);
   return (
@@ -132,6 +200,8 @@ export default function BarbershopPage() {
         </div>
       </section>
 
+      <CelebCarousel />
+
       {/* WHY EXPERIENCE */}
       <section style={{ padding: "100px 1.5rem", maxWidth: 1100, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -139,9 +209,9 @@ export default function BarbershopPage() {
         </motion.div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
           {[
-            { icon: "📍", title: "המקום", body: "הסטודיו שלנו ממוקם במיקום מרכזי ונוח בחולון, עם גישה קלה ומגרש חנייה צמוד ומרווח מאחורי המספרה – כי הדבר האחרון שבא לך לעשות לפני תספורת זה לחפש חנייה ברחובות." },
-            { icon: "💪", title: "הצוות", body: "הספרים בצוות שלנו הם לא סתם עובדים, הם מוסמכי האקדמיה שעברו את סינוני האיכות המחמירים ביותר של בן גונן. כל אחד מהם מחזיק באישיות ייחודית, ידע מעשי רחב והבנה עמוקה של צורות פנים וסוגי שיער." },
-            { icon: "✨", title: "האני מאמין", body: 'אנחנו לא סתם "מורידים שיער". אנחנו מתאימים את התספורת באופן הוליסטי לאופי שלך, למבנה הראש ולצמיחה הטבעית של השערה. אצלנו כל ביקור כולל ייעוץ קצר, פינוק אמיתי, מגבות חמות במידת הצורך, ואפס פשרות על הפיניש.' },
+            { icon: "📍", title: "המקום", body: "הסטודיו שלי ממוקם במיקום מרכזי ונוח בחולון, עם גישה קלה ומגרש חנייה צמוד ומרווח מאחורי המספרה – כי הדבר האחרון שבא לך לעשות לפני תספורת זה לחפש חנייה ברחובות." },
+            { icon: "💪", title: "הצוות", body: "הספרים אצלי הם לא סתם עובדים, הם מוסמכי האקדמיה שעברו את הסינון המחמיר ביותר שלי. כל אחד מחזיק באישיות ייחודית, ידע מעשי רחב והבנה עמוקה של צורות פנים וסוגי שיער." },
+            { icon: "✨", title: "האני מאמין", body: 'אני לא סתם "מוריד שיער". אני מתאים את התספורת באופן הוליסטי לאופי שלך, למבנה הראש ולצמיחה הטבעית של השערה. אצלי כל ביקור כולל ייעוץ קצר, פינוק אמיתי, מגבות חמות במידת הצורך, ואפס פשרות על הפיניש.' },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.12)", borderRadius: 22, padding: "36px 30px" }} whileHover={{ scale: 1.015 }}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, X, ShoppingCart } from "lucide-react";
@@ -20,14 +20,14 @@ const C = {
 
 /* ── TidyCal Booking Modal ─────────────────────────────── */
 function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const loaded = useRef(false);
   useEffect(() => {
-    if (open && !loaded.current) {
+    if (open) {
+      const existing = document.querySelector('script[src="https://tidycal.com/js/embed.js"]');
+      if (existing) existing.remove();
       const s = document.createElement("script");
       s.src = "https://tidycal.com/js/embed.js";
       s.async = true;
       document.body.appendChild(s);
-      loaded.current = true;
     }
   }, [open]);
 
@@ -72,6 +72,76 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+/* ── Celebrity Carousel ────────────────────────────────── */
+const celebs = [
+  { name: "סטפן", role: "שחקן כדורגל", emoji: "⚽", file: "stefan.webp" },
+  { name: "בן אל תבורי", role: "זמר ואמן", emoji: "🎤", file: "ben-el.webp" },
+  { name: "שחקן כדורגל", role: "נבחרת ישראל", emoji: "⚽", file: "football-1.webp" },
+  { name: "כוכב רשת", role: "אינפלואנסר", emoji: "📱", file: "influencer-1.webp" },
+  { name: "ספורטאי", role: "אתלט מקצועי", emoji: "🏆", file: "athlete.webp" },
+  { name: "לקוח VIP", role: "לקוח פרמיום", emoji: "⭐", file: "vip.webp" },
+];
+
+function CelebCarousel() {
+  const all = [...celebs, ...celebs]; // duplicate for seamless loop
+  return (
+    <section style={{ padding: "60px 0 80px", overflow: "hidden" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", marginBottom: 40, textAlign: "center" }}>
+        <div style={{ color: C.gold, fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
+          הגברים שלי
+        </div>
+        <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(1.8rem, 4.5vw, 3rem)", color: C.white, lineHeight: 1.15, margin: 0 }}>
+          סלבס, ספורטאים{" "}
+          <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            וכוכבי רשת:
+          </span>
+        </h2>
+      </div>
+      <div style={{ overflow: "hidden", position: "relative" }}>
+        {/* fade edges */}
+        <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 80, background: "linear-gradient(to left, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 80, background: "linear-gradient(to right, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+        <div className="bb-celeb-track">
+          {all.map((cel, i) => (
+            <div key={i} className="bb-celeb-card">
+              <div style={{
+                width: 190, height: 250, borderRadius: 18,
+                background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
+                border: "1px solid rgba(212,175,55,0.15)",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 8, position: "relative", overflow: "hidden", flexShrink: 0,
+                /* Replace the line below with: <img src={`/celebs/${cel.file}`} style={{width:"100%",height:"100%",objectFit:"cover",position:"absolute",inset:0}} alt={cel.name} /> */
+              }}>
+                <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
+                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+                </div>
+                <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        .bb-celeb-track {
+          display: flex;
+          gap: 20px;
+          width: max-content;
+          animation: bb-scroll 30s linear infinite;
+          padding: 8px 10px;
+        }
+        .bb-celeb-track:hover { animation-play-state: paused; }
+        .bb-celeb-card { flex-shrink: 0; }
+        @keyframes bb-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -157,9 +227,9 @@ export default function HomePage() {
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2 }}
             style={{ fontFamily: "var(--font-heebo)", fontSize: "clamp(1rem, 2.2vw, 1.18rem)", color: C.muted, lineHeight: 1.9, maxWidth: 700, margin: "0 auto 44px" }}
           >
-            במספרת הבוטיק היוקרתית שלנו בחולון תקבל תספורת ברמה שלא ראית — דירוגים חדים, עיצוב זקן אדריכלי, צ׳ייסר וקפה שחור חזק, ואווירה שכולה גבריות אמיתית.
+            במספרת הבוטיק היוקרתית שלי בחולון תקבל תספורת ברמה שלא ראית — דירוגים חדים, עיצוב זקן אדריכלי, צ׳ייסר וקפה שחור חזק, ואווירה שכולה גבריות אמיתית.
             <br />
-            ובאקדמיית BenBarber תלמד ברברינג אמיתי מהמקצוענים הטובים בארץ — על לקוחות חיים, מהיום הראשון.
+            ובאקדמיית BenBarber תלמד ברברינג אמיתי ישירות ממני — על לקוחות חיים, מהיום הראשון.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.3 }}
@@ -183,6 +253,8 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      <CelebCarousel />
 
       {/* ── TWO WORLDS ────────────────────────────────── */}
       <section style={{ padding: "100px 1.5rem", maxWidth: 1200, margin: "0 auto" }}>
@@ -261,15 +333,15 @@ export default function HomePage() {
       {/* ── WHY US ────────────────────────────────────── */}
       <section style={{ padding: "100px 1.5rem", maxWidth: 1200, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <SectionHeading eyebrow="למה אנחנו" title="הסטנדרט שלא תמצא" highlight="בשום מקום אחר" />
+          <SectionHeading eyebrow="למה אני?" title="הסטנדרט שלא תמצא" highlight="בשום מקום אחר" />
         </motion.div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
           {[
-            { num: "01", title: "דיוק בינלאומי וטרנדים חמים", body: "אנחנו מביאים את טכניקות הגזירה והדירוג המתקדמות ביותר ישירות מהבירות המובילות בעולם, ומנגישים אותן בהתאמה מושלמת למרקם השיער ולשוק הישראלי המהיר." },
-            { num: "02", title: "מודל למידה מעשי (לא על בובות)", body: "הדרך היחידה לבנות ביטחון אמיתי בידיים היא לספר אנשים אמיתיים. באקדמיה שלנו התלמידים מתרגלים על מודליסטים תחת השגחה ופידבק צמוד בזמן אמת." },
-            { num: "03", title: "שומרים על קשר וחברות", body: "הלימודים אצלנו הם כרטיס כניסה לקהילת הבוגרים והתלמידים הסגורה בוואטסאפ. התייעצויות, שיתוף עבודות, טיפים עסקיים וליווי מקצועי גם שנים אחרי סיום הקורס." },
-            { num: "04", title: "חוויה גברית אקסקלוסיבית", body: "בין אם הגעת לקורס ובין אם הגעת להתרענן בתספורת – הסטודיו בחולון מציע סביבה מרווחת, מוזיקה נכונה, אנרגיות שיא וצוות שחי ונושם ברברינג בכל רגע." },
+            { num: "01", title: "דיוק בינלאומי וטרנדים חמים", body: "אני מביא את טכניקות הגזירה והדירוג המתקדמות ביותר ישירות מהבירות המובילות בעולם, ומנגיש אותן בהתאמה מושלמת למרקם השיער ולשוק הישראלי המהיר." },
+            { num: "02", title: "מודל למידה מעשי (לא על בובות)", body: "הדרך היחידה לבנות ביטחון אמיתי בידיים היא לספר אנשים אמיתיים. באקדמיה שלי התלמידים מתרגלים על מודליסטים תחת השגחה ופידבק צמוד בזמן אמת." },
+            { num: "03", title: "שומרים על קשר וחברות", body: "הלימודים אצלי הם כרטיס כניסה לקהילת הבוגרים והתלמידים הסגורה בוואטסאפ. התייעצויות, שיתוף עבודות, טיפים עסקיים וליווי מקצועי גם שנים אחרי סיום הקורס." },
+            { num: "04", title: "חוויה גברית אקסקלוסיבית", body: "בין אם הגעת לקורס ובין אם הגעת להתרענן בתספורת – הסטודיו שלי בחולון מציע סביבה מרווחת, מוזיקה נכונה, אנרגיות שיא ואווירה שחיה ונושמת ברברינג בכל רגע." },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -292,7 +364,7 @@ export default function HomePage() {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <SectionHeading eyebrow="חנות המוצרים" title="לשמור על המראה החד" highlight="גם בבית" />
           <p style={{ textAlign: "center", fontFamily: "var(--font-heebo)", fontSize: 16, color: C.muted, maxWidth: 560, margin: "-32px auto 52px", lineHeight: 1.8 }}>
-            אותם החומרים והכלים שאנחנו משתמשים בהם יום-יום במספרה ובאקדמיה, זמינים עבורך לעיצוב מושלם ושמירה על בריאות השיער והזקן.
+            אותם החומרים והכלים שאני משתמש בהם יום-יום במספרה ובאקדמיה, זמינים עבורך לעיצוב מושלם ושמירה על בריאות השיער והזקן.
           </p>
         </motion.div>
 
@@ -333,7 +405,7 @@ export default function HomePage() {
       {/* ── PLAYLIST ──────────────────────────────────── */}
       <section style={{ padding: "80px 1.5rem 120px", maxWidth: 800, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <SectionHeading eyebrow="הויב שלנו" title="תן האזנה לויב" highlight="שלנו" />
+          <SectionHeading eyebrow="הויב שלי" title="תן האזנה לויב" highlight="שלי" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
