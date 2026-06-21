@@ -12,7 +12,7 @@ const C = {
 
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
-  { name: "סטפן", role: "שחקן כדורגל", emoji: "⚽", file: "stefan.webp" },
+  { name: "סטפן", role: "זמר", emoji: "⚽", file: "stephane.webp" },
   { name: "בן אל תבורי", role: "זמר ואמן", emoji: "🎤", file: "ben-el.webp" },
   { name: "שחקן כדורגל", role: "נבחרת ישראל", emoji: "⚽", file: "football-1.webp" },
   { name: "כוכב רשת", role: "אינפלואנסר", emoji: "📱", file: "influencer-1.webp" },
@@ -46,7 +46,12 @@ function CelebCarousel() {
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                 gap: 8, position: "relative", overflow: "hidden",
               }}>
-                <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
+                {cel.file ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+                ) : (
+                  <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
+                )}
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
                   <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
                   <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
