@@ -58,7 +58,7 @@ export function SiteFooter() {
                 marginBottom: 8,
               }}
             >
-              BenBarber
+              בנג'י
             </div>
             <div
               style={{
@@ -82,7 +82,7 @@ export function SiteFooter() {
             >
               מספרת בוטיק ואקדמיה לספרות גברים.
               <br />
-              חולון, ישראל.
+              הרוקמים 23, חולון.
             </p>
           </div>
 
@@ -184,7 +184,7 @@ export function SiteFooter() {
               color: C.dim,
             }}
           >
-            © 2026 BenBarber Academy & Shop. כל הזכויות שמורות.
+            © 2026 בנג'י Academy & Shop. כל הזכויות שמורות.
           </div>
           <Link
             href="/barbershop"

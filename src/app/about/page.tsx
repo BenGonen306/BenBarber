@@ -145,12 +145,10 @@ export default function AboutPage() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 20 }}>
           {[
-            { name: "סטפן", role: "שחקן כדורגל", file: "celebrity-stefan.webp" },
-            { name: "בן אל תבורי", role: "זמר ואמן", file: "celebrity-ben-el.webp" },
-            { name: "שחקן כדורגל", role: "קבוצת ישראל", file: "celebrity-football-1.webp" },
-            { name: "כוכב רשת", role: "אינפלואנסר", file: "celebrity-influencer-1.webp" },
-            { name: "ספורטאי", role: "אתלט מקצועי", file: "celebrity-athlete.webp" },
-            { name: "VIP", role: "לקוח פרמיום", file: "celebrity-vip.webp" },
+            { name: "סטפן", role: "זמר", file: "stephane.webp" },
+            { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
+            { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
+            { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
           ].map((cel, i) => (
             <motion.div key={i}
               initial={{ opacity: 0, y: 28 }}
@@ -159,14 +157,10 @@ export default function AboutPage() {
               transition={{ duration: 0.45, delay: i * 0.07 }}
               style={{ borderRadius: 18, overflow: "hidden", background: C.surface, border: "1px solid rgba(212,175,55,0.12)", position: "relative" }}
               whileHover={{ scale: 1.025 }}>
-              {/* Drop your .webp file here — replace the placeholder div with <img src={`/celebs/${cel.file}`} ... /> */}
-              <div style={{ aspectRatio: "3/4", background: `linear-gradient(155deg, rgba(150,3,26,0.4) 0%, rgba(26,26,26,0.85) 100%)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, position: "relative" }}>
-                <span style={{ fontSize: 52, opacity: 0.25 }}>✂️</span>
-                <span style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim, letterSpacing: "0.08em" }}>
-                  {cel.file}
-                </span>
-                {/* Gold corner accent */}
-                <div style={{ position: "absolute", top: 12, insetInlineEnd: 12, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>★</div>
+              <div style={{ aspectRatio: "3/4", position: "relative" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+                <div style={{ position: "absolute", top: 12, insetInlineEnd: 12, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, zIndex: 1 }}>★</div>
               </div>
               <div style={{ padding: "14px 16px" }}>
                 <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 15, color: C.white }}>{cel.name}</div>
@@ -175,11 +169,6 @@ export default function AboutPage() {
             </motion.div>
           ))}
         </div>
-
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-          style={{ textAlign: "center", fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim, marginTop: 28 }}>
-          להחלפת הפלייסהולדרים: הנח קבצי .webp בתיקיית <code style={{ color: C.gold }}>/public/celebs/</code> עם אותם שמות קבצים.
-        </motion.p>
       </section>
 
       {/* COMMUNITY CTA */}
@@ -194,7 +183,7 @@ export default function AboutPage() {
               <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>קהילה אמיתית</span>
             </h2>
             <p style={{ fontFamily: "var(--font-heebo)", fontSize: 17, color: C.muted, lineHeight: 1.85, maxWidth: 620, margin: "0 auto 36px" }}>
-              המותג BenBarber הוא קודם כל קהילה של אנשי מקצוע, בוגרים ולקוחות שתומכים זה בזה. אלפי התלמידים שעברו אצלי לאורך השנים נהנים מבית חם שתמיד פתוח להשתלמויות, התייעצויות וליווי אישי לאורך כל הקריירה המקצועית שלהם.
+              המותג בנג'י הוא קודם כל קהילה של אנשי מקצוע, בוגרים ולקוחות שתומכים זה בזה. אלפי התלמידים שעברו אצלי לאורך השנים נהנים מבית חם שתמיד פתוח להשתלמויות, התייעצויות וליווי אישי לאורך כל הקריירה המקצועית שלהם.
             </p>
             <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
               <Link href="/academy" style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, borderRadius: 12, padding: "14px 32px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, textDecoration: "none" }}>

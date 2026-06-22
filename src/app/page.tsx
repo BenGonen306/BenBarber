@@ -61,7 +61,7 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
               <div>
                 <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: C.white }}>קביעת תור</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>BenBarber · מספרת בוטיק · חולון</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>בנג'י · מספרת בוטיק · חולון</div>
               </div>
               <button onClick={onClose} style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 10, width: 38, height: 38, cursor: "pointer", color: C.muted, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <X size={18} />
@@ -77,12 +77,10 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
 
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
-  { name: "סטפן", role: "זמר", emoji: "⚽", file: "stephane.webp" },
-  { name: "בן אל תבורי", role: "זמר ואמן", emoji: "🎤", file: "ben-el.webp" },
-  { name: "שחקן כדורגל", role: "נבחרת ישראל", emoji: "⚽", file: "football-1.webp" },
-  { name: "כוכב רשת", role: "אינפלואנסר", emoji: "📱", file: "influencer-1.webp" },
-  { name: "ספורטאי", role: "אתלט מקצועי", emoji: "🏆", file: "athlete.webp" },
-  { name: "לקוח VIP", role: "לקוח פרמיום", emoji: "⭐", file: "vip.webp" },
+  { name: "סטפן", role: "זמר", file: "stephane.webp" },
+  { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
+  { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
+  { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
 ];
 
 function CelebCarousel() {
@@ -114,12 +112,8 @@ function CelebCarousel() {
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                 gap: 8, position: "relative", overflow: "hidden", flexShrink: 0,
               }}>
-                {cel.file ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-                ) : (
-                  <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
-                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
                   <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
                   <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
@@ -173,7 +167,7 @@ function SectionHeading({ eyebrow, title, highlight, center = true }: { eyebrow?
 /* ── Products data ─────────────────────────────────────── */
 const products = [
   { name: "פומייד לעיצוב שיער", desc: "אחיזה חזקה, ברק טבעי. מחזיק לאורך כל היום.", price: "₪69" },
-  { name: "שמן זקן פרמיום", desc: "לחות, ריח טוב ועיצוב זקן מושלם. פורמולת BenBarber.", price: "₪89" },
+  { name: "שמן זקן פרמיום", desc: "לחות, ריח טוב ועיצוב זקן מושלם. פורמולת בנג'י.", price: "₪89" },
   { name: "קיט טיפוח מלא", desc: "פומייד + שמן זקן + קרם פנים. הכל בקופסת מתנה.", price: "₪199" },
 ];
 
@@ -221,10 +215,10 @@ export default function HomePage() {
           <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1 }}
             style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(2rem, 6.5vw, 4.6rem)", lineHeight: 1.1, color: C.white, marginBottom: 22 }}
           >
-            אהלן גבר, ברוך הבא לטופ
+            כרטיס הכניסה שלך
             <br />
             <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold}, ${C.goldLo})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              של סצנת הברברינג בישראל.
+              לעולם הגברי.
             </span>
           </motion.h1>
 
@@ -233,7 +227,7 @@ export default function HomePage() {
           >
             במספרת הבוטיק היוקרתית שלי בחולון תקבל תספורת ברמה שלא ראית — דירוגים חדים, עיצוב זקן אדריכלי, צ׳ייסר וקפה שחור חזק, ואווירה שכולה גבריות אמיתית.
             <br />
-            ובאקדמיית BenBarber תלמד ברברינג אמיתי ישירות ממני — על לקוחות חיים, מהיום הראשון.
+            ובאקדמיית בנג'י תלמד ברברינג אמיתי ישירות ממני — על לקוחות חיים, מהיום הראשון.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.3 }}
@@ -279,7 +273,7 @@ export default function HomePage() {
             },
             {
               icon: "🎓",
-              tag: "אקדמיית BenBarber",
+              tag: "אקדמיית בנג'י",
               title: "ללמוד את המקצוע",
               body: "להפוך את התשוקה שלך לקריירה רווחית ומבוקשת. קורסי ספרות פרונטליים ודיגיטליים למתחילים ולמתקדמים, עם תרגול מעשי על לקוחות אמיתיים מהיום הראשון.",
               cta: "לכל הקורסים וההשתלמויות >>>",
@@ -421,7 +415,7 @@ export default function HomePage() {
           <div style={{ display: "flex", alignItems: "center", gap: 16, paddingBottom: 20, borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
             <div style={{ width: 56, height: 56, borderRadius: 12, background: "linear-gradient(135deg, #1db954, #157a36)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>♫</div>
             <div>
-              <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, color: C.white }}>BenBarber Vibes 🔥</div>
+              <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, color: C.white }}>בנג'י Vibes 🔥</div>
               <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>הפלייליסט הרשמי של הסטודיו · Spotify</div>
             </div>
             <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer"
@@ -434,7 +428,7 @@ export default function HomePage() {
               <div style={{ width: 30, height: 30, borderRadius: 8, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-rubik)", fontSize: 12, color: C.dim, flexShrink: 0 }}>{i + 1}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: "var(--font-rubik)", fontSize: 14, color: C.white, fontWeight: 600 }}>{track}</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim }}>BenBarber Curated</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim }}>בנג'י Curated</div>
               </div>
               <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim }}>3:{String(i * 7 + 22).padStart(2, "0")}</div>
             </div>

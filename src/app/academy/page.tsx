@@ -95,7 +95,7 @@ function CourseCard({ title, badge, body, type, onCTA, ctaLabel }: { title: stri
 /* ── Testimonials ─────────────────────────────────────────── */
 const testimonials = [
   { name: "אבי מ.", role: "בוגר קורס פרונטלי", text: "נכנסתי ללא ניסיון, יצאתי עם מספרה פתוחה. בן גונן לא מלמד תיאוריה על בובות – מהיום הראשון אתה על אנשים אמיתיים." },
-  { name: "דניאל ר.", role: "ספר פעיל שעשה השתלמות", text: "עברתי כבר קורסים בעבר. ההשתלמות של BenBarber הייתה אחרת לגמרי – פירוק טכני ברמה שלא ראיתי בשום מקום." },
+  { name: "דניאל ר.", role: "ספר פעיל שעשה השתלמות", text: "עברתי כבר קורסים בעבר. ההשתלמות של בנג'י הייתה אחרת לגמרי – פירוק טכני ברמה שלא ראיתי בשום מקום." },
   { name: "שיר כ.", role: "בוגרת קורס אונליין", text: "עשיתי את הקורס הדיגיטלי בין עבודה לאמא. הקצב, הנגישות, ורמת ההסברים – מושלם לאנשים עם לו\"ז עמוס." },
 ];
 
@@ -117,7 +117,7 @@ export default function AcademyPage() {
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1 }}
             style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: "clamp(2rem, 6vw, 4.4rem)", lineHeight: 1.1, color: C.white, marginBottom: 22 }}>
-            אקדמיית BenBarber:{" "}
+            אקדמיית בנג'י:{" "}
             <span style={{ background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold}, ${C.goldLo})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               בית הספר ללימודי ספרות גברים המוביל בישראל
             </span>
@@ -207,7 +207,7 @@ export default function AcademyPage() {
       {/* TESTIMONIALS */}
       <section style={{ padding: "0 1.5rem 120px", maxWidth: 1100, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <SectionHeading eyebrow="בוגרים" title="הבוגרים של BenBarber" highlight="מספרים" />
+          <SectionHeading eyebrow="בוגרים" title="הבוגרים של בנג'י" highlight="מספרים" />
         </motion.div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
           {testimonials.map((t, i) => (

@@ -105,7 +105,7 @@ export function SiteHeader() {
                 color: C.white,
               }}
             >
-              BenBarber
+              בנג'י
             </div>
             <div style={{ fontSize: 11, color: C.muted, letterSpacing: "0.05em" }}>
               Academy & Shop

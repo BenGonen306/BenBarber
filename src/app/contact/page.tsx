@@ -137,9 +137,9 @@ export default function ContactPage() {
 
             {/* Contact chips */}
             {[
-              { icon: <Phone size={16} />, label: "טלפון ליצירת קשר", value: "[מספר הטלפון של בן]", href: "tel:+972500000000" },
-              { icon: <MessageCircle size={16} />, label: "וואטסאפ מהיר", value: "שלח הודעה ב-WhatsApp", href: "https://wa.me/972500000000" },
-              { icon: <MapPin size={16} />, label: "כתובת הסטודיו", value: "חולון, ישראל", href: "https://maps.google.com/?q=חולון" },
+              { icon: <Phone size={16} />, label: "טלפון ליצירת קשר", value: "053-620-8925", href: "tel:+972536208925" },
+              { icon: <MessageCircle size={16} />, label: "וואטסאפ מהיר", value: "שלח הודעה ב-WhatsApp", href: "https://wa.me/972536208925?text=" + encodeURIComponent("היי, רציתי לתאם תור / לקבל פרטים") },
+              { icon: <MapPin size={16} />, label: "כתובת הסטודיו", value: "הרוקמים 23, חולון", href: "https://maps.google.com/?q=" + encodeURIComponent("הרוקמים 23, חולון") },
             ].map((item, i) => (
               <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
                 style={{ display: "flex", alignItems: "flex-start", gap: 14, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "20px 22px", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }}
@@ -158,19 +158,35 @@ export default function ContactPage() {
               <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, color: C.goldHi }}>איך מגיעים?</div>
               <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                 <span style={{ fontSize: 22, flexShrink: 0 }}>🚗</span>
-                <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>הסטודיו ממוקם במיקום נגיש במיוחד בחולון. לבאים עם רכב, עומד לרשותכם מגרש חנייה מרווח וחינמי הממוקם ממש מאחורי המתחם שלנו.</p>
+                <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>
+                  <strong style={{ color: C.white }}>ברכב:</strong>{" "}
+                  הסטודיו שלי ממוקם במרכז עזריאלי חולון (רחוב הרוקמים 23). הנגישות מכביש 4 וכביש 44 היא מהירה וחלקה ביותר. לבאים עם רכב, עומד לרשותכם חניון התת-קרקעי המרווח והמסודר של קומפלקס עזריאלי, המציע חנייה בשפע ובנוחות מקסימלית ממש מתחת למתחם.
+                </p>
               </div>
               <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                 <span style={{ fontSize: 22, flexShrink: 0 }}>🚌</span>
-                <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>קווי אוטובוס מרכזיים רבים עוצרים במרחק של פחות מ-3 דקות הליכה מהסטודיו.</p>
+                <p style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>
+                  <strong style={{ color: C.white }}>בתחבורה ציבורית:</strong>{" "}
+                  הקומפלקס מהווה עורק תחבורה מרכזי, וקיימים קווי אוטובוס תדירים וישירים מכל רחבי גוש דן וערי הסביבה העוצרים במסופים הסמוכים, במרחק של פחות מ-3 דקות הליכה מהכניסה לסטודיו.
+                </p>
+              </div>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4 }}>
+                <a href={"https://waze.com/ul?q=" + encodeURIComponent("הרוקמים 23, חולון") + "&navigate=yes"} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "rgba(51,181,229,0.15)", border: "1px solid rgba(51,181,229,0.4)", color: "#9fe0f5", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, textDecoration: "none" }}>
+                  נווט עם Waze ←
+                </a>
+                <a href={"https://maps.google.com/?q=" + encodeURIComponent("הרוקמים 23, חולון")} target="_blank" rel="noopener noreferrer"
+                  style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, textDecoration: "none" }}>
+                  פתח ב-Google Maps ←
+                </a>
               </div>
             </div>
 
-            {/* Map placeholder */}
+            {/* Map */}
             <div style={{ borderRadius: 18, overflow: "hidden", border: "1px solid rgba(212,175,55,0.15)", height: 220, background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
               <MapPin size={32} style={{ color: C.gold }} />
-              <div style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted }}>חולון, ישראל</div>
-              <a href="https://maps.google.com/?q=חולון" target="_blank" rel="noopener noreferrer"
+              <div style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.muted }}>הרוקמים 23, חולון</div>
+              <a href={"https://maps.google.com/?q=" + encodeURIComponent("הרוקמים 23, חולון")} target="_blank" rel="noopener noreferrer"
                 style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, borderRadius: 10, padding: "9px 20px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, textDecoration: "none" }}>
                 פתח ב-Google Maps ←
               </a>

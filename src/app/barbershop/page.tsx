@@ -12,12 +12,10 @@ const C = {
 
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
-  { name: "סטפן", role: "זמר", emoji: "⚽", file: "stephane.webp" },
-  { name: "בן אל תבורי", role: "זמר ואמן", emoji: "🎤", file: "ben-el.webp" },
-  { name: "שחקן כדורגל", role: "נבחרת ישראל", emoji: "⚽", file: "football-1.webp" },
-  { name: "כוכב רשת", role: "אינפלואנסר", emoji: "📱", file: "influencer-1.webp" },
-  { name: "ספורטאי", role: "אתלט מקצועי", emoji: "🏆", file: "athlete.webp" },
-  { name: "לקוח VIP", role: "לקוח פרמיום", emoji: "⭐", file: "vip.webp" },
+  { name: "סטפן", role: "זמר", file: "stephane.webp" },
+  { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
+  { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
+  { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
 ];
 
 function CelebCarousel() {
@@ -46,12 +44,8 @@ function CelebCarousel() {
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                 gap: 8, position: "relative", overflow: "hidden",
               }}>
-                {cel.file ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-                ) : (
-                  <span style={{ fontSize: 42, opacity: 0.28 }}>{cel.emoji}</span>
-                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
                   <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
                   <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
@@ -114,7 +108,7 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
               <div>
                 <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: C.white }}>קביעת תור</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>BenBarber · מספרת בוטיק · חולון</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>בנג'י · מספרת בוטיק · חולון</div>
               </div>
               <button onClick={onClose} style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 10, width: 38, height: 38, cursor: "pointer", color: C.muted, display: "flex", alignItems: "center", justifyContent: "center" }}><X size={18} /></button>
             </div>
