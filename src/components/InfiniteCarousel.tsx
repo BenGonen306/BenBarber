@@ -1,110 +1,85 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 
-export function InfiniteCarousel({ children, speed = 0.5 }: { children: React.ReactNode[]; speed?: number }) {
+export function InfiniteCarousel({ children, speed = 40 }: { children: React.ReactNode[]; speed?: number }) {
+  const x = useMotionValue(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const setWidthRef = useRef(0);
   const isDragging = useRef(false);
-  const dragMoved = useRef(false);
-  const startX = useRef(0);
-  const startScroll = useRef(0);
-  const paused = useRef(false);
-  const rafRef = useRef<number | undefined>(undefined);
+  const isHovering = useRef(false);
+  const ready = useRef(false);
 
   const all = [...children, ...children, ...children]; // 3x buffer for seamless wrap
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const setMiddle = () => {
-      track.scrollLeft = track.scrollWidth / 3;
+    const measure = () => {
+      if (!trackRef.current) return;
+      const setWidth = trackRef.current.scrollWidth / 3;
+      setWidthRef.current = setWidth;
+      x.set(-setWidth);
+      ready.current = true;
     };
-    setMiddle();
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const tick = () => {
-      if (track) {
-        if (!paused.current && !isDragging.current) {
-          track.scrollLeft += speed;
-        }
-        const third = track.scrollWidth / 3;
-        if (track.scrollLeft >= third * 2) track.scrollLeft -= third;
-        else if (track.scrollLeft <= 0) track.scrollLeft += third;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [speed]);
+  useAnimationFrame((_, delta) => {
+    if (isDragging.current || isHovering.current || !ready.current) return;
+    const setWidth = setWidthRef.current;
+    if (!setWidth) return;
+    let next = x.get() - (speed * delta) / 1000;
+    if (next <= -setWidth * 2) next += setWidth;
+    x.set(next);
+  });
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    if (!trackRef.current) return;
-    isDragging.current = true;
-    dragMoved.current = false;
-    paused.current = true;
-    startX.current = e.clientX;
-    startScroll.current = trackRef.current.scrollLeft;
-    trackRef.current.setPointerCapture(e.pointerId);
-    trackRef.current.style.cursor = "grabbing";
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current || !trackRef.current) return;
-    const dx = e.clientX - startX.current;
-    if (Math.abs(dx) > 3) dragMoved.current = true;
-    trackRef.current.scrollLeft = startScroll.current - dx;
-  };
-
-  const endDrag = () => {
-    isDragging.current = false;
-    if (trackRef.current) trackRef.current.style.cursor = "grab";
-    setTimeout(() => {
-      paused.current = false;
-    }, 500);
-  };
-
-  const onClickCapture = (e: React.MouseEvent) => {
-    // suppress click-through after a drag so links/buttons don't fire on swipe
-    if (dragMoved.current) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const wrap = () => {
+    const setWidth = setWidthRef.current;
+    if (!setWidth) return;
+    let val = x.get();
+    while (val <= -setWidth * 2) val += setWidth;
+    while (val > 0) val -= setWidth;
+    x.set(val);
   };
 
   return (
-    <div
-      ref={trackRef}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={endDrag}
-      onPointerLeave={endDrag}
-      onPointerCancel={endDrag}
-      onMouseEnter={() => (paused.current = true)}
-      onMouseLeave={() => (paused.current = false)}
-      onClickCapture={onClickCapture}
-      className="bb-infinite-carousel"
-      style={{
-        display: "flex",
-        gap: 20,
-        overflowX: "auto",
-        cursor: "grab",
-        userSelect: "none",
-        touchAction: "pan-y",
-        WebkitOverflowScrolling: "touch",
-        padding: "8px 10px",
-      }}
-    >
-      {all.map((child, i) => (
-        <div key={i} style={{ flexShrink: 0 }}>
-          {child}
-        </div>
-      ))}
-      <style>{`
-        .bb-infinite-carousel::-webkit-scrollbar { display: none; }
-        .bb-infinite-carousel { scrollbar-width: none; -ms-overflow-style: none; }
-      `}</style>
+    <div style={{ overflow: "hidden", width: "100%" }}>
+      <motion.div
+        ref={trackRef}
+        drag="x"
+        dragMomentum={false}
+        dragElastic={0}
+        onDragStart={() => {
+          isDragging.current = true;
+        }}
+        onDragEnd={() => {
+          isDragging.current = false;
+          wrap();
+        }}
+        onMouseEnter={() => {
+          isHovering.current = true;
+        }}
+        onMouseLeave={() => {
+          isHovering.current = false;
+        }}
+        style={{
+          display: "flex",
+          gap: 20,
+          width: "max-content",
+          x,
+          cursor: "grab",
+          padding: "8px 10px",
+        }}
+      >
+        {all.map((child, i) => (
+          <div key={i} style={{ flexShrink: 0 }}>
+            {child}
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }

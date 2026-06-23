@@ -99,9 +99,6 @@ function CelebCarousel() {
         </h2>
       </div>
       <div style={{ position: "relative" }}>
-        {/* fade edges */}
-        <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 80, background: "linear-gradient(to left, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 80, background: "linear-gradient(to right, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
         <InfiniteCarousel>
           {celebs.map((cel, i) => (
             <div key={i} style={{
