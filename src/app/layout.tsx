@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Heebo, Rubik } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AccessibilityWidget } from "@/components/AccessibilityWidget";
 import "./globals.css";
 
 const heebo = Heebo({
@@ -77,6 +78,7 @@ export default function RootLayout({
           <main style={{ paddingTop: 72 }}>{children}</main>
           <SiteFooter />
         </div>
+        <AccessibilityWidget />
       </body>
     </html>
   );

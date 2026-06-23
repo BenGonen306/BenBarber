@@ -202,6 +202,35 @@ export function SiteFooter() {
             קביעת תור ←
           </Link>
         </div>
+
+        {/* Legal links */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 20,
+            marginTop: 18,
+            paddingTop: 18,
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+          }}
+        >
+          <Link
+            href="/terms"
+            style={{ fontFamily: "var(--font-heebo), sans-serif", fontSize: 12, color: C.dim, textDecoration: "none" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.muted)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.dim)}
+          >
+            תנאי שימוש
+          </Link>
+          <Link
+            href="/privacy"
+            style={{ fontFamily: "var(--font-heebo), sans-serif", fontSize: 12, color: C.dim, textDecoration: "none" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.muted)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.dim)}
+          >
+            מדיניות פרטיות
+          </Link>
+        </div>
       </div>
     </footer>
   );

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 
 const C = {
   red: "#96031a", charcoal: "#1a1a1a", surface: "#232323",
@@ -74,13 +75,13 @@ export default function AboutPage() {
         </motion.div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "start" }}>
-          {/* Portrait */}
+          {/* Portrait video */}
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <div style={{ borderRadius: 24, overflow: "hidden", background: `linear-gradient(145deg, #6b0213 0%, ${C.charcoal} 100%)`, border: "1px solid rgba(212,175,55,0.2)", aspectRatio: "4/5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 110, fontFamily: "var(--font-rubik)", fontWeight: 900, color: "rgba(212,175,55,0.18)", position: "relative", boxShadow: "0 32px 80px rgba(150,3,26,0.35)" }}>
-              ב
-              <div style={{ position: "absolute", bottom: 24, right: 24, background: "rgba(26,26,26,0.88)", backdropFilter: "blur(12px)", border: "1px solid rgba(212,175,55,0.3)", borderRadius: 14, padding: "14px 20px" }}>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, color: C.goldHi }}>בן גונן</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.muted }}>מייסד · ספר ראשי · מנהל אקדמיה</div>
+            <div style={{ borderRadius: 24, overflow: "hidden", background: `linear-gradient(145deg, #6b0213 0%, ${C.charcoal} 100%)`, border: "1px solid rgba(212,175,55,0.2)", aspectRatio: "9/16", position: "relative", boxShadow: "0 32px 80px rgba(150,3,26,0.35)" }}>
+              <YouTubeEmbed videoId="hhcGl2_saxA" title="בן גונן - בנג'י" />
+              <div style={{ position: "absolute", top: 16, right: 16, background: "rgba(26,26,26,0.88)", backdropFilter: "blur(12px)", border: "1px solid rgba(212,175,55,0.3)", borderRadius: 14, padding: "10px 16px", pointerEvents: "none" }}>
+                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 15, color: C.goldHi }}>בן גונן</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.muted }}>מייסד · ספר ראשי · מנהל אקדמיה</div>
               </div>
             </div>
           </motion.div>
