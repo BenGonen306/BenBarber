@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, X, ShoppingCart } from "lucide-react";
+import { InfiniteCarousel } from "@/components/InfiniteCarousel";
 
 const C = {
   red: "#96031a",
@@ -84,7 +85,6 @@ const celebs = [
 ];
 
 function CelebCarousel() {
-  const all = [...celebs, ...celebs]; // duplicate for seamless loop
   return (
     <section style={{ padding: "60px 0 80px", overflow: "hidden" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", marginBottom: 40, textAlign: "center" }}>
@@ -98,47 +98,30 @@ function CelebCarousel() {
           </span>
         </h2>
       </div>
-      <div style={{ overflow: "hidden", position: "relative" }}>
+      <div style={{ position: "relative" }}>
         {/* fade edges */}
         <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 80, background: "linear-gradient(to left, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 80, background: "linear-gradient(to right, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
-        <div className="bb-celeb-track">
-          {all.map((cel, i) => (
-            <div key={i} className="bb-celeb-card">
-              <div style={{
-                width: 190, height: 250, borderRadius: 18,
-                background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
-                border: "1px solid rgba(212,175,55,0.15)",
-                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                gap: 8, position: "relative", overflow: "hidden", flexShrink: 0,
-              }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
-                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
-                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
-                </div>
-                <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
+        <InfiniteCarousel>
+          {celebs.map((cel, i) => (
+            <div key={i} style={{
+              width: 190, height: 250, borderRadius: 18,
+              background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
+              border: "1px solid rgba(212,175,55,0.15)",
+              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+              gap: 8, position: "relative", overflow: "hidden",
+            }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
+                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
+                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
               </div>
+              <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
             </div>
           ))}
-        </div>
+        </InfiniteCarousel>
       </div>
-      <style>{`
-        .bb-celeb-track {
-          display: flex;
-          gap: 20px;
-          width: max-content;
-          animation: bb-scroll 30s linear infinite;
-          padding: 8px 10px;
-        }
-        .bb-celeb-track:hover { animation-play-state: paused; }
-        .bb-celeb-card { flex-shrink: 0; }
-        @keyframes bb-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   );
 }

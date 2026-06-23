@@ -25,13 +25,36 @@ function SectionHeading({ eyebrow, title, highlight, sub }: { eyebrow?: string; 
 }
 
 /* ── Lead modal ─────────────────────────────────────────── */
+const ACADEMY_WEBHOOK_URL = "https://hook.eu1.make.com/dez5ugt7jvh97ubgtlhhmvqs9dvx0vqr";
+
 function LeadModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [name, setName] = useState(""); const [phone, setPhone] = useState(""); const [done, setDone] = useState(false); const [loading, setLoading] = useState(false);
+  const [name, setName] = useState(""); const [phone, setPhone] = useState(""); const [done, setDone] = useState(false); const [loading, setLoading] = useState(false); const [error, setError] = useState(false);
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault(); if (!name.trim() || !phone.trim()) return;
-    setLoading(true); await new Promise(r => setTimeout(r, 900)); setLoading(false); setDone(true);
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch(ACADEMY_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          createdAt: new Date().toISOString(),
+          source: "academy-lead-modal",
+          page: "/academy",
+        }),
+      });
+      if (!res.ok) throw new Error("Webhook responded with an error");
+      setDone(true);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
-  const close = () => { onClose(); setTimeout(() => { setDone(false); setName(""); setPhone(""); }, 350); };
+  const close = () => { onClose(); setTimeout(() => { setDone(false); setError(false); setName(""); setPhone(""); }, 350); };
   const inp: React.CSSProperties = { width: "100%", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: "14px 16px", fontFamily: "var(--font-heebo)", fontSize: 16, color: C.white, outline: "none", boxSizing: "border-box", direction: "rtl" };
   return (
     <AnimatePresence>
@@ -62,6 +85,11 @@ function LeadModal({ open, onClose }: { open: boolean; onClose: () => void }) {
                     <button type="submit" disabled={loading} style={{ background: loading ? "rgba(212,175,55,0.5)" : `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 12, padding: "14px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, cursor: loading ? "not-allowed" : "pointer", marginTop: 4 }}>
                       {loading ? "שולח..." : "שלח פרטים ←"}
                     </button>
+                    {error && (
+                      <p style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: "#ffb3b3", textAlign: "center", margin: 0 }}>
+                        משהו השתבש בשליחה. נסה שוב או צור קשר ישירות בוואטסאפ.
+                      </p>
+                    )}
                   </form>
                 </motion.div>
               )}
@@ -131,6 +159,12 @@ export default function AcademyPage() {
             style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 13, padding: "16px 40px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, cursor: "pointer", boxShadow: "0 6px 28px rgba(212,175,55,0.42)" }}>
             לבחירת מסלול הלימודים שלך ←
           </motion.button>
+
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
+            style={{ marginTop: 44, maxWidth: 640, margin: "44px auto 0", borderRadius: 22, overflow: "hidden", border: "1px solid rgba(212,175,55,0.2)", boxShadow: "0 24px 64px rgba(0,0,0,0.4)" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/academy-track.webp" alt="מסלול הלימודים באקדמיית בנג'י" style={{ width: "100%", display: "block" }} />
+          </motion.div>
         </div>
       </section>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
+import { InfiniteCarousel } from "@/components/InfiniteCarousel";
 
 const C = {
   red: "#96031a", charcoal: "#1a1a1a", surface: "#232323",
@@ -144,31 +145,30 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 20 }}>
-          {[
-            { name: "סטפן", role: "זמר", file: "stephane.webp" },
-            { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
-            { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
-            { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
-          ].map((cel, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.07 }}
-              style={{ borderRadius: 18, overflow: "hidden", background: C.surface, border: "1px solid rgba(212,175,55,0.12)", position: "relative" }}
-              whileHover={{ scale: 1.025 }}>
-              <div style={{ aspectRatio: "3/4", position: "relative" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/celebs/${cel.file}`} alt={cel.name} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-                <div style={{ position: "absolute", top: 12, insetInlineEnd: 12, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, zIndex: 1 }}>★</div>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 80, background: "linear-gradient(to left, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 80, background: "linear-gradient(to right, rgba(26,26,26,0.85), transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <InfiniteCarousel>
+            {[
+              { name: "סטפן", role: "זמר", file: "stephane.webp" },
+              { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
+              { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
+              { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
+            ].map((cel, i) => (
+              <div key={i}
+                style={{ width: 220, borderRadius: 18, overflow: "hidden", background: C.surface, border: "1px solid rgba(212,175,55,0.12)", position: "relative" }}>
+                <div style={{ aspectRatio: "3/4", position: "relative" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
+                  <div style={{ position: "absolute", top: 12, insetInlineEnd: 12, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, zIndex: 1 }}>★</div>
+                </div>
+                <div style={{ padding: "14px 16px" }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 15, color: C.white }}>{cel.name}</div>
+                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim, marginTop: 3 }}>{cel.role}</div>
+                </div>
               </div>
-              <div style={{ padding: "14px 16px" }}>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 15, color: C.white }}>{cel.name}</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 12, color: C.dim, marginTop: 3 }}>{cel.role}</div>
-              </div>
-            </motion.div>
-          ))}
+            ))}
+          </InfiniteCarousel>
         </div>
       </section>
 
