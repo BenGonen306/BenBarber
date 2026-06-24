@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Star, X, ShoppingCart } from "lucide-react";
+import { motion } from "framer-motion";
+import { Star, ShoppingCart } from "lucide-react";
 import { InfiniteCarousel } from "@/components/InfiniteCarousel";
 
 const C = {
@@ -19,62 +18,7 @@ const C = {
   dim: "#777777",
 };
 
-/* ── TidyCal Booking Modal ─────────────────────────────── */
-function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  useEffect(() => {
-    if (open) {
-      const existing = document.querySelector('script[src="https://tidycal.com/js/embed.js"]');
-      if (existing) existing.remove();
-      const s = document.createElement("script");
-      s.src = "https://tidycal.com/js/embed.js";
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  }, [open]);
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          style={{
-            position: "fixed", inset: 0, zIndex: 200,
-            background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)",
-            display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.93, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 20 }}
-            transition={{ duration: 0.24 }}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              background: C.surface, borderRadius: 24,
-              border: "1px solid rgba(212,175,55,0.25)",
-              width: "100%", maxWidth: 740, maxHeight: "90dvh",
-              overflow: "auto", padding: 28,
-            }}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-              <div>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: C.white }}>קביעת תור</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 13, color: C.dim }}>בנג'י · מספרת בוטיק · חולון</div>
-              </div>
-              <button onClick={onClose} style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 10, width: 38, height: 38, cursor: "pointer", color: C.muted, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <X size={18} />
-              </button>
-            </div>
-            <div className="tidycal-embed" data-path="bengon306" style={{ minHeight: 520 }} />
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
+const CAL_URL = "https://cal.eu/בן-גונן-nibcwm";
 
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
@@ -155,13 +99,6 @@ const products = [
    PAGE
 ═══════════════════════════════════════════════════════ */
 export default function HomePage() {
-  const [bookingOpen, setBookingOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = bookingOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [bookingOpen]);
-
   return (
     <>
       {/* ── HERO ──────────────────────────────────────── */}
@@ -213,14 +150,16 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.3 }}
             style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <button
-              onClick={() => setBookingOpen(true)}
-              style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, cursor: "pointer", boxShadow: "0 6px 28px rgba(212,175,55,0.42)", transition: "transform 0.18s, box-shadow 0.18s" }}
+            <a
+              href={CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, cursor: "pointer", boxShadow: "0 6px 28px rgba(212,175,55,0.42)", transition: "transform 0.18s, box-shadow 0.18s", textDecoration: "none", display: "inline-block" }}
               onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 36px rgba(212,175,55,0.58)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 6px 28px rgba(212,175,55,0.42)"; }}
             >
               לקביעת תור ←
-            </button>
+            </a>
             <Link href="/academy"
               style={{ background: "transparent", color: C.white, border: "1.5px solid rgba(255,255,255,0.22)", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 17, textDecoration: "none", transition: "border-color 0.2s, color 0.2s", display: "inline-block" }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.goldHi; }}
@@ -415,8 +354,6 @@ export default function HomePage() {
           ))}
         </motion.div>
       </section>
-
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 }
