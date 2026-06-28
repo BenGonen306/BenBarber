@@ -346,7 +346,7 @@ export default function HomePage() {
       {/* ── PLAYLIST ──────────────────────────────────── */}
       <section style={{ padding: "80px 1.5rem 120px", maxWidth: 800, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <SectionHeading eyebrow="הויב שלי" title="תן האזנה לויב" highlight="שלי" />
+          <SectionHeading eyebrow="הוייב שלי" title="תן האזנה לוייב" highlight="שלי" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
