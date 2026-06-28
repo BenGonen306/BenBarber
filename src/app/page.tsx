@@ -189,6 +189,10 @@ export default function HomePage() {
               cta: "לקביעת תור ביומן >>>",
               href: "/barbershop",
               accent: C.red,
+              media: [
+                { type: "video" as const, src: "/videos/1313.webm" },
+                { type: "video" as const, src: "/videos/1414.webm" },
+              ],
             },
             {
               icon: "🎓",
@@ -198,6 +202,10 @@ export default function HomePage() {
               cta: "לכל הקורסים וההשתלמויות >>>",
               href: "/academy",
               accent: C.goldLo,
+              media: [
+                { type: "image" as const, src: "/images/1212.webp" },
+                { type: "image" as const, src: "/images/1515.webp" },
+              ],
             },
           ].map((card, i) => (
             <motion.div
@@ -231,14 +239,30 @@ export default function HomePage() {
                 {card.cta}
               </Link>
 
-              {/* Photo placeholder grid */}
+              {/* Media grid */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
-                {[0, 1].map((j) => (
-                  <div key={j} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: "rgba(255,255,255,0.04)", border: "1px dashed rgba(212,175,55,0.2)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6 }}>
-                    <span style={{ fontSize: 22, opacity: 0.35 }}>{i === 0 ? "✂️" : "🎓"}</span>
-                    <span style={{ fontFamily: "var(--font-heebo)", fontSize: 10, color: C.dim, letterSpacing: "0.08em" }}>
-                      {i === 0 ? "תמונת מספרה" : "תמונת אקדמיה"}
-                    </span>
+                {card.media.map((m, j) => (
+                  <div key={j} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                    {m.type === "video" ? (
+                      <video
+                        src={m.src}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        controls={false}
+                        className="w-full h-full object-cover"
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      />
+                    ) : (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={m.src}
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
