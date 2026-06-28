@@ -242,7 +242,7 @@ export default function HomePage() {
               {/* Media grid */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
                 {card.media.map((m, j) => (
-                  <div key={j} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                  <div key={j} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "9/16", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(212,175,55,0.2)" }}>
                     {m.type === "video" ? (
                       <video
                         src={m.src}
