@@ -23,10 +23,13 @@ const experienceOptions = [
   { value: "pro", label: "אני ספר פעיל ומנוסה (רוצה השתלמויות מתקדמות)" },
 ];
 
+const WEBHOOK_URL = "https://hook.eu1.make.com/dez5ugt7jvh97ubgtlhhmvqs9dvx0vqr";
+
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", experience: "" });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState(false);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [k]: e.target.value }));
@@ -35,9 +38,29 @@ export default function ContactPage() {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim()) return;
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1000));
-    setLoading(false);
-    setDone(true);
+    setError(false);
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          message: form.message,
+          experience: form.experience,
+          createdAt: new Date().toISOString(),
+          source: "contact-page",
+          page: "/contact",
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setDone(true);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const focusBorder = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -114,6 +137,11 @@ export default function ContactPage() {
                     <textarea placeholder="ספר לנו במה נוכל לעזור..." value={form.message} onChange={set("message")} rows={4}
                       style={{ ...inp, resize: "vertical", minHeight: 110 }} onFocus={focusBorder} onBlur={blurBorder} />
                   </div>
+                  {error && (
+                    <div style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: "#ff8888", textAlign: "center" }}>
+                      משהו השתבש בשליחה. נסה שוב או פנה אלינו בוואטסאפ.
+                    </div>
+                  )}
                   <button type="submit" disabled={loading}
                     style={{ background: loading ? "rgba(212,175,55,0.5)" : `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 12, padding: "15px 24px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 16, cursor: loading ? "not-allowed" : "pointer", transition: "transform 0.18s" }}
                     onMouseEnter={e => !loading && (e.currentTarget.style.transform = "translateY(-2px)")}
