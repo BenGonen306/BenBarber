@@ -20,12 +20,25 @@ const C = {
 
 const CAL_URL = "https://cal.eu/בן-גונן-nibcwm";
 
+const EMERGENCY_TEL = "tel:+972536208925";
+
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
   { name: "סטפן", role: "זמר", file: "stephane.webp" },
   { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
   { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
   { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
+];
+
+const carouselVideos = [
+  "/videos/wa1.webm",
+  "/videos/wa2.webm",
+  "/videos/wa3.webm",
+  "/videos/wa4.webm",
+  "/videos/wa5.webm",
+  "/videos/wa6.webm",
+  "/videos/wa7.webm",
+  "/videos/design.webm",
 ];
 
 function CelebCarousel() {
@@ -44,23 +57,30 @@ function CelebCarousel() {
       </div>
       <div style={{ position: "relative" }}>
         <InfiniteCarousel>
-          {celebs.map((cel, i) => (
-            <div key={i} style={{
-              width: 190, height: 250, borderRadius: 18,
-              background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
-              border: "1px solid rgba(212,175,55,0.15)",
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              gap: 8, position: "relative", overflow: "hidden",
-            }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+          {[
+            ...celebs.map((cel, i) => (
+              <div key={`cel-${i}`} style={{
+                width: 190, height: 250, borderRadius: 18,
+                background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
+                border: "1px solid rgba(212,175,55,0.15)",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 8, position: "relative", overflow: "hidden",
+              }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
+                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+                </div>
+                <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
               </div>
-              <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
-            </div>
-          ))}
+            )),
+            ...carouselVideos.map((src, i) => (
+              <div key={`vid-${i}`} style={{ width: 190, height: 250, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(212,175,55,0.15)", flexShrink: 0 }}>
+                <video src={src} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            )),
+          ]}
         </InfiniteCarousel>
       </div>
     </section>
@@ -148,25 +168,34 @@ export default function HomePage() {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.3 }}
-            style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}
           >
-            <a
-              href={CAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, cursor: "pointer", boxShadow: "0 6px 28px rgba(212,175,55,0.42)", transition: "transform 0.18s, box-shadow 0.18s", textDecoration: "none", display: "inline-block" }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 36px rgba(212,175,55,0.58)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 6px 28px rgba(212,175,55,0.42)"; }}
+            <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+              <a
+                href={CAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 17, cursor: "pointer", boxShadow: "0 6px 28px rgba(212,175,55,0.42)", transition: "transform 0.18s, box-shadow 0.18s", textDecoration: "none", display: "inline-block" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 36px rgba(212,175,55,0.58)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 6px 28px rgba(212,175,55,0.42)"; }}
+              >
+                לקביעת תור ←
+              </a>
+              <Link href="/academy"
+                style={{ background: "transparent", color: C.white, border: "1.5px solid rgba(255,255,255,0.22)", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 17, textDecoration: "none", transition: "border-color 0.2s, color 0.2s", display: "inline-block" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.goldHi; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)"; e.currentTarget.style.color = C.white; }}
+              >
+                לאקדמיית הספרות
+              </Link>
+            </div>
+            <a href={EMERGENCY_TEL}
+              style={{ fontFamily: "var(--font-heebo)", fontSize: 14, color: C.dim, textDecoration: "underline", textDecorationColor: "rgba(199,199,199,0.35)", textUnderlineOffset: 3, cursor: "pointer", transition: "color 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = C.muted; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = C.dim; }}
             >
-              לקביעת תור ←
+              אני צריך תור חירום היום
             </a>
-            <Link href="/academy"
-              style={{ background: "transparent", color: C.white, border: "1.5px solid rgba(255,255,255,0.22)", borderRadius: 13, padding: "16px 38px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 17, textDecoration: "none", transition: "border-color 0.2s, color 0.2s", display: "inline-block" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.goldHi; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)"; e.currentTarget.style.color = C.white; }}
-            >
-              לאקדמיית הספרות
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -203,8 +232,8 @@ export default function HomePage() {
               href: "/academy",
               accent: C.goldLo,
               media: [
-                { type: "image" as const, src: "/images/1212.webp" },
-                { type: "image" as const, src: "/images/1515.webp" },
+                { type: "video" as const, src: "/videos/wa1.webm" },
+                { type: "video" as const, src: "/videos/design.webm" },
               ],
             },
           ].map((card, i) => (

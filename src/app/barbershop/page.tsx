@@ -10,6 +10,7 @@ const C = {
 };
 
 const CAL_URL = "https://cal.eu/בן-גונן-nibcwm";
+const EMERGENCY_TEL = "tel:+972536208925";
 
 /* ── Celebrity Carousel ────────────────────────────────── */
 const celebs = [
@@ -17,6 +18,17 @@ const celebs = [
   { name: "בן אל תבורי", role: "זמר ואמן", file: "ben-el.webp" },
   { name: "אור ביטון", role: "משפיען", file: "or-biton.webp" },
   { name: "איציק ראובן", role: "אינפלואנסר", file: "itzik.webp" },
+];
+
+const carouselVideos = [
+  "/videos/wa1.webm",
+  "/videos/wa2.webm",
+  "/videos/wa3.webm",
+  "/videos/wa4.webm",
+  "/videos/wa5.webm",
+  "/videos/wa6.webm",
+  "/videos/wa7.webm",
+  "/videos/design.webm",
 ];
 
 function CelebCarousel() {
@@ -33,23 +45,30 @@ function CelebCarousel() {
       </div>
       <div style={{ position: "relative" }}>
         <InfiniteCarousel>
-          {celebs.map((cel, i) => (
-            <div key={i} style={{
-              width: 190, height: 250, borderRadius: 18,
-              background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
-              border: "1px solid rgba(212,175,55,0.15)",
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              gap: 8, position: "relative", overflow: "hidden",
-            }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
-                <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
-                <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+          {[
+            ...celebs.map((cel, i) => (
+              <div key={`cel-${i}`} style={{
+                width: 190, height: 250, borderRadius: 18,
+                background: `linear-gradient(155deg, rgba(150,3,26,0.38) 0%, rgba(26,26,26,0.92) 100%)`,
+                border: "1px solid rgba(212,175,55,0.15)",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 8, position: "relative", overflow: "hidden",
+              }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/celebs/${cel.file}`} alt={cel.name} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px", background: "linear-gradient(to top, rgba(20,20,20,0.96) 0%, transparent 100%)" }}>
+                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 14, color: C.white }}>{cel.name}</div>
+                  <div style={{ fontFamily: "var(--font-heebo)", fontSize: 11, color: C.dim }}>{cel.role}</div>
+                </div>
+                <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
               </div>
-              <div style={{ position: "absolute", top: 10, insetInlineEnd: 10, width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>★</div>
-            </div>
-          ))}
+            )),
+            ...carouselVideos.map((src, i) => (
+              <div key={`vid-${i}`} style={{ width: 190, height: 250, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(212,175,55,0.15)", flexShrink: 0 }}>
+                <video src={src} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            )),
+          ]}
         </InfiniteCarousel>
       </div>
     </section>
@@ -188,9 +207,15 @@ export default function BarbershopPage() {
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
                 <span style={{ fontFamily: "var(--font-rubik)", fontWeight: 900, fontSize: 26, background: `linear-gradient(135deg, ${C.goldHi}, ${C.gold})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.price}</span>
-                <a href={CAL_URL} target="_blank" rel="noopener noreferrer" style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
-                  לתור ←
-                </a>
+                {s.highlight ? (
+                  <a href={EMERGENCY_TEL} style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
+                    תתקשר אליי 📞
+                  </a>
+                ) : (
+                  <a href={CAL_URL} target="_blank" rel="noopener noreferrer" style={{ background: `linear-gradient(135deg, ${C.gold}, ${C.goldLo})`, color: C.charcoal, border: "none", borderRadius: 10, padding: "9px 18px", fontFamily: "var(--font-rubik)", fontWeight: 700, fontSize: 13, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
+                    לתור ←
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
